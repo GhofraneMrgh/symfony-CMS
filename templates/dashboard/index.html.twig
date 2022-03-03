@@ -1,0 +1,51 @@
+{% extends 'layout_admin.html.twig' %}
+
+{% block title %} Dashboard {% endblock %}
+
+{% block base %}
+<div class="main_content_iner ">
+        <div class="container-fluid p-0 sm_padding_15px">
+            <div class="row justify-content-center">
+                <div class="col-12">
+                    <div class="dashboard_header mb_50">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="dashboard_header_title">
+                                    <h3>Dashboard</h3>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="dashboard_breadcam text-right">
+                                    <p><a href="{{ path('dashboard') }}">Dashboard</a> <i class="fas fa-caret-right"></i>   Address Book</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="list_counter_wrapper white_box mb_30 p-0 card_height_100">
+                        <div class="single_list_counter">
+                         <center>
+                            <h3 class="deep_blue_2" ><span class="counter deep_blue_2 ">{{ produits|length}}</span> + </h3>
+                            <p>Total produits</p>
+
+                        </div>
+                        <div class="single_list_counter">
+                            <center>
+                            <h3 class="deep_blue_2"><span class="counter deep_blue_2">{{ couleurs|length}}</span> + </h3>
+                            <p>Total couleurs</p>
+                            </center>
+
+                        </div>
+                        <div class="single_list_counter">
+                            <center>
+                            <h3 class="deep_blue_2"><span class="counter deep_blue_2">{{ tailles|length}}</span> + </h3>
+                            <p>Claimed taille</p>
+                            </center>
+                        </div>
+                    </div>
+                </div>              
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,226 @@
+{% extends 'layout_admin.html.twig' %}
+{% block base %}
+ <div class="main_content_iner ">
+        <div class="container-fluid p-0">
+            <div class="row justify-content-center">
+              <div class="col-12">
+                <div class="dashboard_header mb_50">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="dashboard_header_title">
+                                <h3>Produits</h3>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="dashboard_breadcam text-right">
+                                <p><a href="index-2.html">Dashboard</a> <i class="fas fa-caret-right"></i> Produits</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              </div>
+                <div class="col-12">
+                    <div class="QA_section">
+                        <div class="white_box_tittle list_header">
+                            <h4>Table des produits</h4>
+                            <div class="box_right d-flex lms_block">
+                                <div class="add_button ml-10">
+                                <button type="button" class="btn_1" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Ajouter un produit</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="QA_table mb_30">
+                            <!-- table-responsive -->
+                            <table class="table lms_table_active">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Description</th>
+                                        <th scope="col">Prix</th>
+                                        <th scope="col">Taille</th>
+                                        <th scope="col">Couleur</th>
+                                        <th scope="col">Sexe</th>
+                                        <th scope="col">Quantité</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {% for produit in produits %}
+                                    <tr>
+                                        <th scope="row">{{ produit.id }}</th>
+                                        <td>{{ produit.description }}</td>
+                                        <td>{{ produit.prix }}</td>
+                                        <td>{{ produit.taille }}</td>
+                                        <td>{{ produit.couleurs }}</td>
+                                        <td>{{ produit.sexe }}</td>
+                                        <td>{{ produit.qt }}</td>
+                                        <td>{{ produit.status }}</td>
+                                        <td>
+                                        <a type="button" href="#" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal1{{ produit.id }}" data-whatever="@mdo">modifier</a>
+                                        <a href="http://127.0.0.1:8000/deleteProduct/{{ produit.id }}" class="btn btn-danger">supprimer</a>
+                                    </tr>
+
+                                    <div class="modal fade" id="exampleModal1{{ produit.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                          <div class="modal-content">
+                                            <div class="modal-header">
+                                              <h5 class="modal-title" id="exampleModalLabel">Modifier un produit</h5>
+                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                              </button>
+                                            </div>
+                                            <form action="http://127.0.0.1:8000/editProduct/{{ produit.id }}" method="post">
+                                            <div class="modal-body">
+                                                <div class="form-group">
+                                                  <label for="exampleInputPassword1">Description : </label>
+                                                  <input type="text" class="form-control" id="exampleInputPassword1" name="desc" value="{{ produit.description }}">
+                                                </div>
+                                                <div class="form-group">
+                                                  <label for="message-text" class="col-form-label">Prix : </label>
+                                                  <input type="text" class="form-control" id="exampleInputPassword1" name="prix" value="{{ produit.prix }}">
+                                                </div>
+                                                <div class="form-group">
+                                                  <label for="exampleFormControlSelect1">Taille : </label>
+                                                  <select class="form-control" id="exampleFormControlSelect1" name="taille">
+                                                    <option value="{{ produit.taille }}">{{ produit.taille }}</option>
+                                                    {% for taille in tailles %}
+                                                    <option value="{{ taille.description }}">{{ taille.description }}</option>
+                                                    {% endfor %}
+                                                  </select>
+                                                </div>
+                                                <div class="form-group">
+                                                  <label for="exampleFormControlSelect1">Sexe : </label>
+                                                  <select class="form-control" id="exampleFormControlSelect1" name="sexe">
+                                                    <option value="{{ produit.sexe }}">{{ produit.sexe }}</option>
+                                                    {% if (produit.sexe == 'Homme')  %}
+                                                    <option value="Femme">
+                                                    </option>
+                                                    <option value="Enfants">Enfants</option>
+                                                    {% elseif (produit.sexe == 'Femme') %}
+                                                    <option value="Homme">Homme</option>
+                                                    <option value="Enfants">Enfants</option>
+                                                    {% else %}
+                                                    <option value="Homme">Homme</option>
+                                                    <option value="Femme">Femme</option>
+                                                    {% endif %}
+                                                  </select>
+                                                </div>
+                                                <div class="form-group">
+                                                  <label for="exampleFormControlSelect1">Couleurs : </label>
+                                                  <select class="form-control" id="exampleFormControlSelect1" name="couleur">
+                                                    <option value="{{ produit.couleurs }}">{{ produit.couleurs }}</option>
+                                                    {% for couleur in couleurs %}
+                                                    <option value="{{ couleur.description }}">{{ couleur.description }}</option>
+                                                    {% endfor %}
+                                                  </select>
+                                                </div>
+                                                <div class="form-group">
+                                                  <label for="message-text" class="col-form-label">Quantité : </label>
+                                                  <input type="number" class="form-control" id="exampleInputPassword1" name="qt" value="{{ produit.qt }}">
+                                                </div>
+                                                <div class="form-group">
+                                                  <label for="exampleFormControlSelect1">Status : </label>
+                                                  <select class="form-control" id="exampleFormControlSelect1" name="status">
+                                                    {% if (produit.status == 'Disponible')  %}
+                                                    <option value="{{ produit.status }}">{{ produit.status }}</option>
+                                                    <option value="Epuisé">Epuisé</option>
+                                                    {% else %}
+                                                    <option value="{{ produit.status }}">{{ produit.status }}</option>
+                                                    <option value="Disponible">Disponible</option>
+                                                    {% endif %}
+                                                  </select>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                                              <button type="submit" class="btn btn-primary">Enregistrer</button>
+                                            </div>
+                                            </form>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Ajouter un produit</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="http://127.0.0.1:8000/createProduct" method="post">
+      <div class="modal-body">
+          <div class="form-group">
+            <label for="exampleInputPassword1">Description : </label>
+            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Description" name="desc">
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Prix : </label>
+            <input type="number" class="form-control" id="exampleInputPassword1" placeholder="Prix" name="prix">
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlSelect1">Taille : </label>
+            <select class="form-control" id="exampleFormControlSelect1" name="taille">
+              <option value="">Choisir un Taille</option>
+              {% for taille in tailles %}
+              <option value="{{ taille.description }}">{{ taille.description }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlSelect1">Sexe : </label>
+            <select class="form-control" id="exampleFormControlSelect1" name="sexe">
+              <option value="">Choisir un sexe</option>
+              <option value="Homme">Homme</option>
+              <option value="Femme">Femme</option>
+              <option value="Enfants">Enfants</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlSelect1">Couleurs : </label>
+            <select class="form-control" id="exampleFormControlSelect1" name="couleur">
+              <option value="">Choisir un couleur</option>
+              {% for couleur in couleurs %}
+              <option value="{{ couleur.description }}">{{ couleur.description }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Quantité : </label>
+            <input type="number" class="form-control" id="exampleInputPassword1" placeholder="Quantité" name="qt">
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlSelect1">Status : </label>
+            <select class="form-control" id="exampleFormControlSelect1" name="status">
+              <option value="">Choisir un Status</option>
+              <option value="Disponible">Disponible</option>
+              <option value="Epuisé">Epuisé</option>
+            </select>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+        <button type="submit" class="btn btn-primary">Enregistrer</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}
+
+ 
+
+
