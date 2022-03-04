@@ -10,5 +10,5 @@ Avec un Dashbord Bootstrap
 
 
 il y à une fichier database.sql : il faut intégrer dans votre phpmyadmin .
-Login : admin@admin.com
+Login : admin@admin.tn
 Password : P@ssw0rd
