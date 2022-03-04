@@ -1,14 +1,18 @@
 # symfony-CMS
-c'est un projet Symfony : contien le partie : 
-login 
-register 
-Ajouter un produit 
-Modifier un produit 
-Supprimer un Produits 
-
-Avec un Dashbord Bootstrap 
+c'est un projet Symfony : 
 
 
-il y à une fichier database.sql : il faut intégrer dans votre phpmyadmin .
+
+contient les parties :  login , register , Ajouter , Modifier , Supprimer un produit avec un Dashbord Bootstrap 
+
+
+
+il y à une fichier database.sql : il faut intégrer dans votre Base de Données .
+
+
+
 Login : admin@admin.tn
+
+
+
 Password : P@ssw0rd
